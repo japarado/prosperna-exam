@@ -16,3 +16,4 @@ public/css/
 public/js/
 public/mix-manifest.json
 .idea/
+.php_cs.cache
