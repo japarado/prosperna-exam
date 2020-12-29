@@ -9,7 +9,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form  action="{{ route('register.pay') }}">
+        <form  action="{{ route('register') }}" method="POST">
+			@csrf
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')" />
@@ -58,8 +59,4 @@
 			</div>
         </form>
     </x-auth-card>
-	@section('guest-layouts.scripts')
-		  <script src="https://www.paypal.com/sdk/js?client-id={{ env("PAYPAL_SANDBOX_CLIENT_ID") }}&vault=true"></script>
-		  <script src="{{ asset('js/pages/auth/register.js') }}"></script>
-	@stop
 </x-guest-layout>

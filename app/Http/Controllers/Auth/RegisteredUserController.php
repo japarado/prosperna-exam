@@ -34,64 +34,20 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-		if(!$request->session()->get('from-session-info-screen'))
-		{
-			return redirect(route('register'));
-		}
-        $request->validate([
-			'paypal-response-hidden' => 'required',
-        ]);
-		$paypal_response = json_decode($request->input('paypal-response-hidden'));
-
-		DB::transaction(function() use ($request, $paypal_response) {
-			Auth::login($user = User::create([
-				'name' => $request->session()->get('name'),
-				'email' => $request->session()->get('email'),
-				'password' => Hash::make($request->session()->get('password')),
-			]));
-
-
-			$subscription = new Subscription([
-				'name' => 'Basic Website Subscription',
-				'order_id' => $paypal_response->orderID,
-				'payment_id' => $paypal_response->paymentID,
-				'billing_token' => $paypal_response->billingToken,
-				'subscription_id' => $paypal_response->subscriptionID,
-				'facilitator_access_token' => $paypal_response->facilitatorAccessToken
-			]);
-
-			$user->subscriptions()->save($subscription);
-
-			event(new Registered($user));
-		});
-
-
-        return redirect(RouteServiceProvider::HOME);
-    }
-
-	public function pay(Request $request)
-	{
-        $request->validate([
+		$request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
-		$name = $request->input('name');
-		$email = $request->input('email');
-		$password = $request->input('password');
+		Auth::login($user = User::create([
+			'name' => $request->name,
+			'email' => $request->email,
+			'password' => Hash::make($request->password),
+		]));
 
-		$request->session()->flash('from-register-info-screen', true);
-		$request->session()->flash('name', $name);
-		$request->session()->flash('email', $email);
-		$request->session()->flash('password', $password);
+		event(new Registered($user));
 
-		$context = [
-			'name' => $name,
-			'email' => $email,
-			'password' => $password
-		];
-
-		return view('auth.pay', $context);
+		return redirect(RouteServiceProvider::HOME);
 	}
 }
