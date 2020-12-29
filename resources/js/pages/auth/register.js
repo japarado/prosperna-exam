@@ -9,6 +9,8 @@ paypal
 
 		onApprove: (data, actions) => 
 		{
+			console.table(data)
+			console.table(actions)
 			alert("Yout have successfully created a subscription", + data.subscriptionID);
 		}
 	})
