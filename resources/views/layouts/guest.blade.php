@@ -21,6 +21,6 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
-    </body>
 		@yield('guest-layouts.scripts')
+    </body>
 </html>
