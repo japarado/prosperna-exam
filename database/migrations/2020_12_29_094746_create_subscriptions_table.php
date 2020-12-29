@@ -17,7 +17,7 @@ class CreateSubscriptionsTable extends Migration
             $table->id();
 			$table->string('name');
 			$table->string('order_id');
-			$table->string('pyament_id')->nullable();
+			$table->string('payment_id')->nullable();
 			$table->string('subscription_id');
 			$table->string('facilitator_access_token');
 
