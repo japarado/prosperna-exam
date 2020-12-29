@@ -54,9 +54,14 @@
                     {{ __('Register') }}
                 </x-button>
             </div>
+
+            <div class="flex items-center justify-end mt-4">
+				<div id="paypal-button-container" class="container"></div>
+			</div>
         </form>
     </x-auth-card>
 	@section('guest-layouts.scripts')
 		  <script src="https://www.paypal.com/sdk/js?client-id={{ env("PAYPAL_SANDBOX_CLIENT_ID") }}&vault=true"></script>
+		  <script src="{{ asset('js/pages/auth/register.js') }}"></script>
 	@stop
 </x-guest-layout>
