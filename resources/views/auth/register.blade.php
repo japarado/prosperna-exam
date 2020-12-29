@@ -56,4 +56,7 @@
             </div>
         </form>
     </x-auth-card>
+	@section('guest-layouts.scripts')
+		  <script src="https://www.paypal.com/sdk/js?client-id={{ env("PAYPAL_SANDBOX_CLIENT_ID") }}&vault=true"></script>
+	@stop
 </x-guest-layout>
