@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+		@yield('guest-layouts.styles')
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,4 +22,5 @@
             {{ $slot }}
         </div>
     </body>
+		@yield('guest-layouts.scripts')
 </html>
