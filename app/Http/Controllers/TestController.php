@@ -27,7 +27,6 @@ class TestController extends Controller
 		/* $products_response = $this->paypalService->getProducts(); */
 
 		$products = $this->paypalService->getProducts();
-		dd($products);
 		return view('tests.index');
     }
 
