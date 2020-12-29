@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\PayPalService;
 use Illuminate\Http\Request;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use GuzzleHttp\Client;
 
 class TestController extends Controller
 {
+	private PayPalService $paypalService;
+
+	public function __construct()
+	{
+		$this->paypalService = new PayPalService();
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -13,6 +23,11 @@ class TestController extends Controller
      */
     public function index()
     {
+		/* $token_response = $this->paypalService->requestToken(); */
+		/* $products_response = $this->paypalService->getProducts(); */
+
+		$products = $this->paypalService->getProducts();
+		dd($products);
 		return view('tests.index');
     }
 
@@ -82,3 +97,4 @@ class TestController extends Controller
         //
     }
 }
+
