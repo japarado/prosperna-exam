@@ -228,7 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-		'PayPal' => Srmklive\PayPal\Facades\PayPal::class
+		'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+		'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

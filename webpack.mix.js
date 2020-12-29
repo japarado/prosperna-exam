@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,8 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-]);
+mix
+	.js("resources/js/app.js", "public/js")
+	.js("resources/js/pages/tests/index.js", "public/js/pages/tests/")
+	.js("resources/js/pages/auth/register.js", "public/js/pages/auth/")
+	.postCss("resources/css/app.css", "public/css", [
+		require("postcss-import"),
+		require("tailwindcss"),
+		require("autoprefixer"),
+	])
+	.sourceMaps(true, "source-map")
+	.browserSync({
+		proxy: "https://prosperna-exam.apc",
+		open: false
+	});
