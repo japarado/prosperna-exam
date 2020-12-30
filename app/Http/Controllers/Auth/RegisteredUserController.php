@@ -34,20 +34,19 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-		if(!$request->session()->get('from-session-info-screen'))
-		{
-			return redirect(route('register'));
-		}
         $request->validate([
-			'paypal-response-hidden' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:8',
+			'paypal-response-hidden' => 'required'
         ]);
 		$paypal_response = json_decode($request->input('paypal-response-hidden'));
 
 		DB::transaction(function() use ($request, $paypal_response) {
 			Auth::login($user = User::create([
-				'name' => $request->session()->get('name'),
-				'email' => $request->session()->get('email'),
-				'password' => Hash::make($request->session()->get('password')),
+				'name' => $request->name,
+				'email' => $request->email,
+				'password' => Hash::make($request->password),
 			]));
 
 
@@ -69,7 +68,7 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
-	public function pay(Request $request)
+	public function validateUserInfo(Request $request)
 	{
         $request->validate([
             'name' => 'required|string|max:255',
@@ -77,21 +76,6 @@ class RegisteredUserController extends Controller
             'password' => 'required|string|confirmed|min:8',
         ]);
 
-		$name = $request->input('name');
-		$email = $request->input('email');
-		$password = $request->input('password');
-
-		$request->session()->flash('from-register-info-screen', true);
-		$request->session()->flash('name', $name);
-		$request->session()->flash('email', $email);
-		$request->session()->flash('password', $password);
-
-		$context = [
-			'name' => $name,
-			'email' => $email,
-			'password' => $password
-		];
-
-		return view('auth.pay', $context);
+		return response()->json("everything is fine");
 	}
 }
