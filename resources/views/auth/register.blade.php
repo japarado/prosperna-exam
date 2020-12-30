@@ -9,7 +9,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form  action="{{ route('register.pay') }}">
+        <form  action="{{ route('register') }}" method="POST">
+			@csrf
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')" />
