@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
 				'facilitator_access_token' => $paypal_response->facilitatorAccessToken
 			]);
 
-			$user->subscriptions()->save($subscription);
+			$user->subscription()->save($subscription);
 
 			event(new Registered($user));
 		});
