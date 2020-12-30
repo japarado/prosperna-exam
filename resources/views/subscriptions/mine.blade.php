@@ -16,7 +16,6 @@
 								<th class="border border-green-600">Plan Name</th>
 								<th class="border border-green-600">Subscription ID</th>
 								<th class="border border-green-600">Last Payment</th>
-								<th  class="border border-green-600">Next Billing</th>
 								<th class="border border-green-600">Amount Paid</th>
 							</tr>
 						</thead>
@@ -25,7 +24,6 @@
 								<td class="border border-green-600">{{ $user->subscription->name }}</td>
 								<td class="border border-green-600">{{ $user->subscription->subscription_id }}</td>
 								<td class="border border-green-600">{{ $last_payment_date }}</td>
-								<td class="border border-green-600">{{ $next_billing_date }}</td>
 								<td class="border border-green-600">{{ $payment_amount }} {{ $currency }}</td>
 							</tr>
 						</tbody>
