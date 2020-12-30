@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,13 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::prefix('subscriptions')->group(function() {
 		Route::get('mine', [SubscriptionController::class, 'mine'])->name('subscriptions.mine');
+	});
+
+});
+
+Route::middleware(['guest'])->group(function() {
+	Route::prefix('users')->group(function() {
+		Route::post('debug-delete-all', [UserController::class, 'debugDeleteAll'])->name('users.debug-delete-all');
 	});
 });
 
