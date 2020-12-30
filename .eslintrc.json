@@ -1,0 +1,23 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": ["error", "tab"],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+        "no-var": "warn",
+        "prefer-const": "warn",
+        "arrow-parens": "warn",
+        "brace-style": ["warn", "allman"],
+        "space-infix-ops": ["warn", { "int32Hint": false }],
+        "prefer-arrow-callback": "warn"
+    }
+}
