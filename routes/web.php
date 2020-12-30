@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::resource('tests', TestController::class)->parameter('tests', 'id');
+
+	Route::get('subscriptions/mine', [SubscriptionController::class, 'mine'])->name('subscriptions.mine');
+	Route::resource('subscriptions', SubscriptionController::class)->parameter('subscriptions', 'id');
 });
 
 require __DIR__.'/auth.php';
