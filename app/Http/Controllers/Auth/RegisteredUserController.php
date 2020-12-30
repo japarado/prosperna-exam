@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ValidateRegistrationInfoRequest;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -32,14 +34,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-			'paypal-response-hidden' => 'required'
-        ]);
 		$paypal_response = json_decode($request->input('paypal-response-hidden'));
 
 		DB::transaction(function() use ($request, $paypal_response) {
@@ -68,14 +64,8 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
-	public function validateUserInfo(Request $request)
+	public function validateUserInfo(ValidateRegistrationInfoRequest $request)
 	{
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
-
-		return response()->json("everything is fine");
+		return response()->json();
 	}
 }
