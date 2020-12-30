@@ -71,6 +71,25 @@ class PayPalService {
 		return json_decode($response->getBody());
 	}
 
+	public function getSubscription(string $subscription_id)
+	{
+		$response = $this->client->get("billing/subscriptions/{$subscription_id}", [
+			'headers' => [
+				'Authorization' => "Bearer {$this->accessToken}"
+			]
+		]);
+		return json_decode($response->getBody());
+	}
+
+	public function getPlan(string $plan_id)
+	{
+		$response = $this->client->get("billing/plans/{$plan_id}", [
+			'headers' => [
+				'Authorization' => "Bearer {$this->accessToken}"
+			]
+		]);
+		return json_decode($response->getBody());
+	}
 
 	// Helper functions
 	private function createClient(): Client
