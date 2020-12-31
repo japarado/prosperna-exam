@@ -28,3 +28,6 @@ when I learn more so that I can use it as a template.
 2. Known Bugs
 	1. The registration screen shows PayPal-related errors when submitting invalid user info
 	![alt_text](https://res.cloudinary.com/dkxsudplj/image/upload/v1609340034/prosperna-exam/prosperna-exam-registration-error_rdpnjy.png "Registration page error")
+3. Additional Work
+	1. Add middleware to check subscription data for every request 
+4. Webhooks or a CRON job to check subscription status every day
